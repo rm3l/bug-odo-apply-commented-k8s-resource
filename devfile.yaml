@@ -33,6 +33,25 @@ components:
     memoryLimit: 1024Mi
     mountSources: true
   name: runtime
+
+- name: my-k8s-component
+  kubernetes:
+    deployByDefault: true
+    inlined: |
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: my-nginx
+      spec:
+        containers:
+        - name: nginx
+          image: nginx
+          imagePullPolicy: IfNotPresent
+
+      ---
+      # odo will error out because of of this empty manifest
+
+
 metadata:
   description: Go (version 1.18.x) is an open source programming language that makes
     it easy to build simple, reliable, and efficient software.
